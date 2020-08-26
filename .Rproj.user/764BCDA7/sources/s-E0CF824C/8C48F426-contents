@@ -1,0 +1,491 @@
+x <- rnorm(1000)
+ep1 <- rnorm(1000, 0, 0.01)
+y <- x + ep1
+cor(x,y)
+
+w <- rnorm(1000, 10, 25)
+ep2 <- rnorm(1000, 0, 25)
+z <- w + ep2
+cor(w,z)
+plot(w,z)
+plot(x,y)     
+
+#--------------------------
+#Exercicio - Regressão simples
+
+Y <- c(4.5,5.9,4.2,5.2,8.1,9.7,10.7,11.9,12,12.3)
+X <- c(0.9,2.5,1.3,1.8,3.1,4.6,6.1,6,5.9,6.1)
+plot(Y~X, pch = 16, col = "grey", main = "Exercicio do slide")
+beta_1hat <- sum((Y - mean(Y))*(X - mean(X)))/sum((X - mean(X))^2)
+beta_0hat <- mean(Y) - beta_1hat*mean(X)
+abline(a = beta_0hat, b = beta_1hat, col = "blue", lty = 2)
+?abline
+#Usando os comandos
+summary(resmodel)
+resmodel <- lm(Y~X)
+abline(resmodel, col = "red", lty = 2)
+
+#####################################
+#Exercicios Michel
+#1)
+df <- read.csv2("dados-football.csv")
+plot(df$y~df$x8 , pch = 16, col = "grey")
+resmodel1 <- lm(df$y~df$x8)
+abline(resmodel1, col = "red", lty = 2)
+cor(df$y,df$x8)
+#2)
+de <- read.csv2("dados-energia.csv")
+plot(de$y~de$x4 , pch = 16, col = "grey")
+resmodel2 <- lm(de$y~de$x4)
+abline(resmodel2, col = "red", lty = 2)
+cor(de$y,de$x4)
+#3)
+dg <- read.csv2("dados-gasolina.csv")
+plot(dg$y~dg$x1 , pch = 16, col = "grey")
+resmodel3 <- lm(dg$y~dg$x1)
+abline(resmodel3, col = "red", lty = 2)
+cor(dg$y,dg$x1)
+#4)
+dc <- read.csv2("dados-casas.csv")
+plot(dc$y~dc$x1 , pch = 16, col = "grey")
+resmodel4 <- lm(dc$y~dc$x1)
+abline(resmodel4, col = "red", lty = 2)
+cor(dc$y,dc$x1)
+#5)
+dh <- read.csv2("dados-pureza-hidro.csv")
+plot(dh$purity~dh$hydro , pch = 16, col = "grey")
+resmodel5 <- lm(dh$purity~dh$hydro)
+abline(resmodel5, col = "red", lty = 2)
+cor(dh$purity,dh$hydro)
+
+#Simulação - Variância em regressão
+
+n <- 1000
+sigma <-0.5
+x <- runif(n, 0, 5)
+erro <- rnorm(n, 0, sigma)
+b_0 <- 5
+b_1 <- 1
+mi <- b_0 + b_1*x
+y <- mi + erro
+par(mfrow = c(1,1))
+plot(y~x , pch = 16, col = "grey", xlim = c(-5,10), ylim = c(min(y_hatinf), max(y_hatsup)))
+resmodel <- lm(y~x)
+abline(resmodel, col = "red", lwd = 2)
+abline(a = 5, b = 1, col = "blue")
+y_hatsup <- array()
+y_hatinf <- array()
+beta_1hat <- sum((y - mean(y))*(x - mean(x)))/sum((x - mean(x))^2)
+beta_0hat <- mean(y) - beta_1hat*mean(x)
+for (j in 1:16) {
+  xn <- -6 + j
+  y_0 <- beta_0hat + beta_1hat*xn
+  y_hatsup[j] <- y_0 + qt(0.975,n-2)*sd(y)*sqrt(1+(1/n)+ (xn - mean(x))^2/sd(x))
+  y_hatinf[j] <- y_0 - qt(0.975,n-2)*sd(y)*sqrt(1+(1/n)+ (xn - mean(x))^2/sd(x))
+}
+s <- seq(-5, 10, by = 1)
+lines(s,y_hatsup)
+lines(s,y_hatinf)
+hist(y_hat)
+for (j in 1:10){
+  for(i in 1:100)
+  {
+    erro <- rnorm(100)
+    y <- mi + erro
+    beta_1hat[i] <- sum((y[i] - mean(y))*(xn - mean(x)))/sum((xn - mean(x))^2)
+    beta_0hat[i] <- mean(y) - beta_1hat*mean(x)
+    abline(a = beta_0hat[i], b = beta_1hat[i], col = "blue", lty = 2)
+    
+  }
+  xn <- 10 - j
+}
+xn <- 10
+
+for (j in 1:10) {
+    y_hat[j] <- beta_0hat + beta_1hat*xn
+    hist(y_hat[j])
+    xn <- 10 - j
+}
+par(mfrow = c(1,1))
+y_hat <- beta_0hat + beta_1hat*xn
+hist(y_hat)
+ 
+
+###################################################################
+# Regressão Multipla
+###################################################################
+
+normal <- lm(iris$Sepal.Length ~ iris$Sepal.Width + iris$Petal.Length + iris$Petal.Width)
+inte <- lm(iris$Sepal.Length ~ iris$Sepal.Width * iris$Petal.Length * iris$Petal.Width)
+summary(lm(iris$Sepal.Length ~ iris$Sepal.Width + iris$Petal.Length + iris$Petal.Width)
+)
+dim(normal)
+c <-summary(inte)
+dim(c)
+names(c)
+c$coefficients[,4]
+b <- anova(normal)
+str(normal)
+str(b)
+names(b)
+b$`Pr(>F)`
+a <- summary(lm(iris$Sepal.Length ~ iris$Sepal.Width * iris$Petal.Length))
+names(a)
+a$coefficients / a$
+normal.1 <- lm(iris$Sepal.Length ~ iris$Sepal.Width + iris$Petal.Length)
+summary(normal.1)
+iris
+cor(iris[,1:4])
+length(teste$`Pr(>F)`)
+
+############
+#sum(teste > 0.05) criterio, entra no while com o resultado do criterio
+#which.max pega o maior p valor
+#model.matrix --- matrix ou cbind
+#MVTNORM 
+
+backwardpv <- function(x,y,alpha)
+{
+  reg <- lm(y~x)
+  X <- cbind(1,x)
+  xn <- X
+  aa <- summary(reg)
+  bb <- aa$coefficients[,4]
+  criterio <- sum(bb>alpha)
+  if(criterio > 0){
+    xmenos <- c()
+    historico <- data.frame(names(bb))
+    historico[,2] <- names(bb)
+    while (criterio > 0)
+    {
+    pmaxi <- which.max(bb)
+    xmenos <- cbind(xmenos, as.character(historico[which(names(pmaxi) == historico[,2]),1]))
+    historico[which(names(pmaxi) == historico[,2]),2] <- NA
+    xn <- xn[,-pmaxi]
+    reg <- lm(y ~ -1 + xn)
+    aa <- summary(reg)
+    bb <- aa$coefficients[,4]
+    historico[!is.na(historico[,2]),2] <- names(bb) 
+    criterio <- sum(bb>alpha)
+   }
+  }
+  names(reg$coefficients) <- as.character(historico[!is.na(historico[,2]),1])
+  lista <- list(reg, xmenos)
+  names(lista) <- c("Seleção Backward", "Histórico")
+  return(lista)
+}
+require(mvtnorm)
+p=100
+n=1000
+mcov <- matrix(runif(p, 0,1), ncol = p, nrow = p)
+diag(mcov) <- 1
+for (i in 1:p) {
+  for (j in 1:p) {
+    mcov[i,j] <- mcov[j,i]
+  }
+}
+mcov
+x=rmvnorm(n=n,mean=runif(p,-10,10)) # sigma=matriz identidade
+beta=matrix(runif(p+1,-0.5,0.5))
+X=cbind(1,x)
+erro=rnorm(n,0,1)
+y=X%*%beta + erro
+summary(lm(y~x))
+fit.model=backwardpv(x,y,0.01)
+fit.model
+summary(fit.model$`Seleção Backward`)
+fit.model$Histórico
+
+#Simulação da seleção
+x1.modelo <- function()
+{
+  resultado <- array()
+  print("a")
+  for (i in 1:10) {
+    n=1000
+    p = 3
+    sig <- positiva.definida(3)
+    x=rmvnorm(n=n,mean=runif(p,-10,10), sig) # sigma=matriz identidade
+    beta=matrix(runif(p,-0.5,0.5))
+    X=cbind(1,x[,-1])
+    erro=rnorm(n,0,1)
+    y=X%*%beta + erro
+    summary(lm(y~x))
+    fit.model=backwardpv(x,y,0.01)
+    resultado[i] <- sum(fit.model$Histórico == "x1")
+  }
+  
+}
+x1.modelo()
+
+
+#########################################FORWARD #################################
+
+require(mvtnorm)
+#Gerando x nao correlacionado entre si
+tam <- 4
+x=rmvnorm(n=n,mean=runif(tam,-10,10)) # sigma=matriz identidade
+beta=matrix(runif(tam+1,-0.5,0.5))
+X=cbind(1,x)
+erro=rnorm(n,0,1)
+y=X%*%beta + erro
+summary(lm(y~x))
+#########
+
+k = 0
+reg <- lm(y ~ 1)
+summary(reg)
+teste.3 <- array()
+historico <- data.frame()
+for(i in 1:tam){
+  historico[i,1] <- paste0('x', i)
+  historico[i,2] <- paste0('x', i)
+}
+for (i in 1:tam) {
+  teste <- summary(lm(y~x[,i]))
+  teste.2 <- teste$coefficients[,4]
+  teste.3[i] <- teste.2[k+2]
+}
+teste.3
+pmini <- which.min(teste.3)
+oi <- array()
+alpha <- 0.05
+if(teste.3[pmini] < alpha)
+{
+  oi[1] <- historico[!is.na(historico[,2]),1][pmini]
+  historico[historico[,1] == oi[1], 2] <- NA
+  reg.nova <- lm(y~x[,pmini])
+}
+k <- k+1
+teste.3 <- array()
+for (i in 1:tam) {
+   if(i == pmini) {
+    next()
+  } else {
+    teste <- summary(lm(y ~ x[,pmini] + x[,i]))
+    teste.2 <- teste$coefficients[,4]
+    teste.3[i] <- teste.2[k+2]
+  }
+}
+teste.3
+pmini <- which.min(teste.3)
+oi <- array()
+alpha <- 0.05
+if(teste.3[pmini] < alpha){
+  historico[pmini,2]<- NA
+  reg.nova <- lm(y ~ x[,is.na(historico[,2])])
+  summary(reg.nova)
+
+}
+
+
+
+for(i in 1:tam-k) {
+  teste <- summary(lm(y~eval(parse(text = paste0('x[,1] + x[,', i, ']')))))
+}
+
+
+
+
+
+
+
+aa.f <- summary(lm(y ~ x[,1]))
+bb.f <- aa.f$coefficients[,4]
+correlacao <- abs(cov(x,y))
+cor.frame<- data.frame(correlacao , row.names = names(bb.f))
+cor.maxi <- which.max(cor.frame$correlacao)
+ward1 <- bb.f[cor.maxi]
+
+forwardpv <- function(x,y,alpha){
+  reg <- lm(y~1)
+  X <- cbind(1,x)
+  xn <- X
+  aa <- summary(reg)
+  bb <- aa$coefficients[,4]
+  criterio <- sum(bb>alpha)
+  if(criterio > 0){
+    xmais <- c()
+    historico <- data.frame(names(bb))
+    historico[,2] <- names(bb)
+    while (criterio > 0)
+    {
+      pmaxi <- which.max(bb)
+      xmenos <- cbind(xmenos, as.character(historico[which(names(pmaxi) == historico[,2]),1]))
+      historico[which(names(pmaxi) == historico[,2]),2] <- NA
+      xn <- xn[,-pmaxi]
+      reg <- lm(y ~ -1 + xn)
+      aa <- summary(reg)
+      bb <- aa$coefficients[,4]
+      historico[!is.na(historico[,2]),2] <- names(bb) 
+      criterio <- sum(bb>alpha)
+    }
+  }
+  names(reg$coefficients) <- as.character(historico[!is.na(historico[,2]),1])
+  lista <- list(reg, xmenos)
+  names(lista) <- c("Seleção Backward", "Histórico")
+  return(lista)
+}
+
+
+################################## RASCUNHO ##################################
+##########################################################################
+soja <- read.table("http://www.leg.ufpr.br/~walmes/cursoR/cnpaf/soja.txt",
+                   header=TRUE, sep="\t", dec=",")
+str(soja)
+
+#-----------------------------------------------------------------------------
+# ver o peso de 100 grãos
+
+require(lattice)
+
+xyplot(pesograo~potassio, groups=agua, data=soja, type=c("p","a"))
+xyplot(Tempo~Volume,groups = Distancia, data = test, type = c("p", "a"))
+xyplot(pesograo~potassio|agua, data=soja, type=c("p","a"))
+
+#-----------------------------------------------------------------------------
+# ajuste de um modelo polinomial nos dois fatores
+
+m0 <- lm(test$Tempo ~ test$Volume + test$Distancia)
+par(mfrow=c(2,2)); plot(m0); layout(1)
+?influence.measures
+summary(influence.measures(m0))
+summary(m0)
+anova(m0)
+test[9,] # influente segundo dffits
+
+m0 <- lm(Tempo ~ Volume + Distancia, data=test[-9,])
+par(mfrow=c(2,2)); plot(m0); layout(1)
+
+anova(m0)
+summary(m0)
+
+m1 <- lm(pesograo~bloco+(agua+I(agua^2))*potassio+I(potassio^2),
+         data=soja[-55,])
+par(mfrow=c(2,2)); plot(m1); layout(1)
+
+anova(m0, m1)
+summary(m1)
+
+#-----------------------------------------------------------------------------
+# fazendo a predição
+?expand.grid
+pred <- expand.grid(bloco="I", agua=seq(37.5,62.5,l=30),
+                    potassio=seq(0,180,l=30))
+pred$y <- predict(m1, newdata=pred)
+
+#-----------------------------------------------------------------------------
+# representando com wireframe()
+
+require(RColorBrewer)
+
+display.brewer.all()
+colr <- brewer.pal(11, "RdYlGn")
+colr <- colorRampPalette(colr, space="rgb")
+
+zlab <- "Peso de 100 grãos"
+xlab <- "Potássio no solo"
+ylab <- "Nível de saturação de água"
+
+wireframe(y~potassio*agua, data=pred,
+          scales=list(arrows=FALSE), zlab=list(zlab, rot=90),
+          xlab=list(xlab, rot=24), ylab=list(ylab, rot=-37),
+          col.regions=colr(100),  drape=TRUE,
+          screen=list(z=40, x=-70))
+
+#-----------------------------------------------------------------------------
+# representando em um levelplot()
+
+# grid mais fino
+m0 <- lm(Tempo ~ Volume + Distancia, data=test[-9,])
+par(mfrow=c(2,2)); plot(m0); layout(1)
+
+anova(m0)
+summary(m0)
+grid
+sas <- predict(m0)
+
+levelplot(y~potassio*agua, data=pred, col.regions=colr(100),
+          xlab=xlab, ylab=ylab)
+
+#-----------------------------------------------------------------------------
+# adicionando rotulo à legenda de cores, baseado nas mensagens da r-help
+# http://r.789695.n4.nabble.com/Adding-title-to-colorkey-td4633584.html
+
+library(grid)
+
+# modo 1
+levelplot(y~potassio*agua, data=pred, col.regions=colr(100),
+          xlab=xlab, ylab=ylab,
+          par.settings=list(layout.widths=list(axis.key.padding=4)))
+grid.text(zlab, x=unit(0.88, "npc"), y=unit(0.5, "npc"), rot=90)
+
+# modo 2
+levelplot(y~potassio*agua, data=pred, col.regions=colr(100),
+          xlab=xlab, ylab=ylab,
+          ylab.right=zlab,
+          par.settings=list(
+            layout.widths=list(axis.key.padding=0, ylab.right=2)))
+
+require(latticeExtra)
+
+# modo 3
+p <- levelplot(y~potassio*agua, data=pred, col.regions=colr(100),
+               xlab=xlab, ylab=ylab,
+               par.settings=list(
+                 layout.widths=list(right.padding=4)))
+p$legend$right <- list(fun=mergedTrellisLegendGrob(p$legend$right,
+                                                   list(fun=textGrob, args=list(zlab, rot=-90, x=2)),
+                                                   vertical=FALSE))
+print(p)
+
+#-----------------------------------------------------------------------------
+# adicionando contornos, baseado em
+# https://stat.ethz.ch/pipermail/r-help/2006-February/088166.html
+
+#png(file="f037.png", width=500, height=400)
+p <- levelplot(y~potassio*agua, data=pred, col.regions=colr(100),
+               xlab=xlab, ylab=ylab,
+               panel=function(..., at, contour=FALSE, labels=NULL){
+                 panel.levelplot(..., at=at, contour=contour, labels=labels)
+                 panel.contourplot(..., at=at, contour=TRUE,
+                                   labels=list(labels=format(at, digits=4),
+                                               cex=0.9))
+               },
+               par.settings=list(
+                 layout.widths=list(right.padding=4)))
+p$legend$right <- list(fun=mergedTrellisLegendGrob(p$legend$right,
+                                                   list(fun=textGrob, args=list(zlab, rot=-90, x=2)),
+                                                   vertical=FALSE))
+print(p)
+#dev.off()
+
+grid <- expand.grid(x=test$Volume, y=test$Tempo, z=test$Distancia)
+grid
+levelplot(Tempo~Volume+Distancia, data = test, grid, cuts = 50, xlab="",
+          ylab="", main="Weird Function", sub="with log scales",
+          colorkey = FALSE, region = TRUE)
+#################################################################################### 
+####################################### fim do rascunho #########################
+
+####################### GRAFICO 3D #################
+test <- read.table("dados.txt", header=F, sep="")
+test
+names(test) <- c("Tempo", "Volume", "Distancia")
+
+plot(test)
+library(scatterplot3d)
+?scatterplot3d
+scatterplot3d(test$Volume, test$Tempo, test$Distancia, color = "red", pch = 16)
+
+library(car)
+?scatter3d
+scatter3d(test$Volume, test$Tempo, test$Distancia, xlab = "Volume", ylab = "Tempo",
+          zlab = "Distancia")
+model <- lm(test$Tempo ~ test$Volume + test$Distancia)
+
+summary(model)
+anova(model)
+
+######################################################### multivariada
+

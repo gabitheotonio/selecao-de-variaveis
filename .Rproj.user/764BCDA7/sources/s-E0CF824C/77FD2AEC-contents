@@ -1,0 +1,29 @@
+# Seleção de variáveis
+## Classificação dos arquivos
+
+###Regressão linear simples
+Banco de dados:  
+- *dados-casa*  
+- *dados-energia*  
+- *dados-football*  
+- *dados-gasolina*  
+- *dados-pureza-hidro*  
+
+Scripts: para regressão linear simples test_script
+
+###Regressão linear múltipla
+- Método de seleção de variáveis  
+*backard.r* - toda a programação de um backward univariado  
+*forward.r* - toda a programação de um forward univariado  
+*lasso.r* - uma programação inicial sobre lasso  
+
+### Regressão Multivariada
+*Teste_dados.R* - toda a limpeza dos dados praticos atlas.brasil-consulta e testes com o banco de dados  
+*estimadores_multi.R* - programação da matriz de blocos grande e dos estimadores beta e sigma chapeu  
+*generalização.R* - Generalização para qualquer p, q ou n da regressão para as funções de estimadores e faz_matriz_grandona  
+*multivariate-backard.R* - a programação completa do backard multivariado para todos os casos  
+  
+  Programado por Gabriela Theotonio dos Santos  
+  Orientado por Clécio da Silva Ferreira
+
+

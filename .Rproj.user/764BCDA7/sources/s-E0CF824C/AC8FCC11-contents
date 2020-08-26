@@ -1,0 +1,50 @@
+
+library(ggplot2)
+n_modelos <- function(p){
+  x <- numeric()
+  x[1:p] <- 1:p
+  return(sum(sapply(x, choose, n = p))) }
+x[1:d] <- 1:d
+sum(sapply(x, choose, n = 1)
+d = seq(1, 20, by = 1)
+?sapply
+sapply(d,n_modelos)
+modelos <- data.frame(d = d, mod = sapply(d, n_modelos) )
+ggplot(modelos, aes(x = d, y = mod)) +
+  geom_line(colour = "blue", size = 1) +
+  geom_point(colour = "blue", size = 2) +
+  ylab("Número de modelos")
+
+require(mvtnorm)
+tam <- 1000
+n <- 10
+x=rmvnorm(n=n,mean=runif(tam,-10,10)) # sigma=matriz identidade
+beta=matrix(runif(tam+1,-0.5,0.5))
+X=cbind(1,x)
+erro=rnorm(n,0,1)
+y=X%*%beta + erro
+a <- summary(lm(y~x))
+novo <- a$coefficients[-1,1]
+sum(abs(novo))
+library(glmnet)
+?cv.glmnet
+?glmnet
+ajuste1 <- glmnet(x,y,alpha = 1)
+plot(ajuste1)
+plot(ajuste1$lambda, ajuste1$a0)
+plot(ajuste1$lambda, ajuste1$dev.ratio)
+ajuste = cv.glmnet(x, y, alpha=1) 
+plot(ajuste)
+log(ajuste$lambda.min)
+log(ajuste$lambda.1se)
+ajuste1 = glmnet(x, y, alpha=1, lambda = 0.06962051) 
+coef(teste)
+class(teste)
+teste <- summary(ajuste1)
+plot(beta.novo)
+beta.novo <- teste[2,]
+# ajusta o modelo
+# (calcula coeficientes
+# para diferentes lambdas,
+# a escolha do grid e automatica
+# mas pode ser mudada
