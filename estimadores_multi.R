@@ -1,0 +1,201 @@
+#Estimadores
+
+######### Simulação 
+library(mvtnorm)
+library(Matrix)
+library(dplyr)
+library(tidyverse)
+
+faz.matriz.grandona <- function(bd.resposta, bd.explica)
+{
+  #definindo indices
+  n <- dim(bd.resposta)[1]
+  p <- dim(bd.explica)[2]
+  q <- dim(bd.resposta)[2]
+  
+  nest_data <- bd.explica %>% as_tibble() %>% group_split(row_number(), keep = FALSE) %>% map_df(nest)
+  
+  vet_list <- nest_data %>% mutate(vet = lapply(data, function(row) {rbind(cbind(row, t(rep(0, p))) %>% rename('1' = x1, '2' = x2, '3' = x3, '4' = 1, '5' = 2, '6' = 3), 
+                                                                           cbind(t(rep(0, p)),row) %>% rename('1' = x1, '2' = x2, '3' = x3, '4' = 1, '5' = 2, '6' = 3))} ))
+  
+  unnest_data <- vet_list$vet %>% map(unnest)
+  
+  vet_matrix_list <- lapply(unnest_data, function(x) as.matrix(x))
+   
+  matriz.grande <- map_df(vet_matrix_list, ~as.data.frame(.))
+  lista.final <- list(matrizgrande = matriz.grande, matrizvet = vet_matrix_list)
+  return(lista.final)
+}
+
+p <- 3
+q <- 2
+n <- 5
+positiva.definida <- function(p)
+{
+  mcov <- matrix(runif(p^2, -1,1), ncol = p, nrow = p)
+  diag(mcov) <- abs(diag(mcov))
+  mcov <- (mcov + t(mcov))/2
+  while(sum(eigen(mcov)$values < 0) != 0) {
+    mcov <- matrix(runif(p^2, -1,1), ncol = p, nrow = p)
+    mcov
+    diag(mcov) <- abs(diag(mcov))
+    mcov <- (mcov + t(mcov))/2
+    
+  }
+  return(mcov)
+}
+x=rmvnorm(n=n,mean=runif(p,-10,10), sigma = positiva.definida(p))
+x=rmvnorm(n=n, mean = runif(p,-10,10)) #identidade
+X <- list()
+beta=matrix(runif(q*p,-5,5))
+y <- matrix(0, n, q)
+
+#GERA Y
+
+for (i in 1:n) {
+  X[[i]] <- rbind(cbind(t(x[i,]), t(rep(0, p))), cbind(t(rep(0, p)),t(x[i,]))) 
+  mu.i <- X[[i]]%*%beta
+  y[i,] <- as.vector(mu.i) + rmvnorm(1, mean = rep(0,q), sigma = diag(runif(q, 0.5, 1.5)))
+}
+
+X
+y <- as.data.frame(y)
+x <- as.data.frame(x)
+names(x) <- c("x1","x2","x3")
+names(y) <- c("y1","y2")
+matriz.grande <- faz.matriz.grandona(y, x)
+head(matriz.grande$matrizgrande)
+matriz.grande$matrizvet
+
+####################################################################################
+estimadores <- function(x.list, y.resposta)
+{
+  sigma_inicial <- cov(y.resposta)
+  
+  listabep <- lapply(x.list, function(xqualquer) {(t(xqualquer)%*%solve(sigma_inicial)%*%xqualquer)})
+  bep.matrix <- solve(apply(simplify2array(listabep), c(1,2), sum))
+  
+  listapop.pt1 <- lapply(x.list, function(xqualquer) {(t(xqualquer)%*%solve(sigma_inicial))})
+  listapop.pt2 <- lapply(1:dim(y.resposta)[1], function(indice) {listapop.pt1[[indice]]%*%t(y.resposta[indice,])})
+  pop.matrix <- apply(simplify2array(listapop.pt2), c(1,2), sum)
+  
+  beta.chapeu_inicial <- bep.matrix%*%pop.matrix
+  teta0 <- c(as.vector(beta.chapeu_inicial), vech(sigma_inicial))
+  crit <- 1
+  cont <- 0
+  beta.iteracao <- beta.chapeu_inicial
+  sigma.iteracao <- sigma_inicial
+  while ((crit>=10^-6) & (cont <= 1000)) {
+
+    iteracao.sig1 <- lapply(x.list, function(xqualquer) {xqualquer%*%beta.iteracao})
+    iteracao.sig2 <- lapply(1:dim(y.resposta)[1], function(indice) {t(y.resposta[indice,]) - iteracao.sig1[[indice]]})
+    iteracao.sig3 <- lapply(1:dim(y.resposta)[1], function(indice) {as.matrix(iteracao.sig2[[indice]])%*%t(as.matrix(iteracao.sig2[[indice]]))})
+    sigma.iteracao <- (1/dim(y.resposta)[1])*apply(simplify2array(iteracao.sig3), c(1,2), sum)
+    
+    
+    listabep <- lapply(x.list, function(xqualquer) {(t(xqualquer)%*%solve(sigma.iteracao)%*%xqualquer)})
+    bep.matrix <- solve(apply(simplify2array(listabep), c(1,2), sum))
+    
+    listapop.pt1 <- lapply(x.list, function(xqualquer) {(t(xqualquer)%*%solve(sigma.iteracao))})
+    listapop.pt2 <- lapply(1:dim(y.resposta)[1], function(indice) {listapop.pt1[[indice]]%*%t(y.resposta[indice,])})
+    pop.matrix <- apply(simplify2array(listapop.pt2), c(1,2), sum)
+    
+    beta.iteracao <- bep.matrix%*%pop.matrix
+  
+    teta <- c(as.vector(beta.iteracao), vech(sigma.iteracao))
+    crit <- sqrt(sum((teta-teta0)^2))
+    teta0 <- teta
+    cont <- cont + 1
+    
+  }
+  
+  lista.final <- list(beta.iteracao, sigma.iteracao, cont)
+  names(lista.final) <- c("Beta chapeu", "Sigma chapeu", "contador")
+  return(lista.final)
+}  
+objeto <- estimadores(X,y)
+objeto$`Beta chapeu`
+objeto$contador
+objeto$`Beta chapeu` - beta
+objeto$
+
+
+########### Dados reais
+
+matriz.grandona <- faz.matriz.grandona(dados.resposta, dados.explicativos.multi %>% rename(x1 = desocupacao, x2 = PEA, x3 = t.analf))
+
+objeto <- estimadores(matriz.grandona$matrizvet, dados.resposta)
+
+objeto$`Beta chapeu`
+objeto$`Sigma chapeu`
+
+
+######################## Simulação para verificar o vies
+require(mvtnorm)
+x=rmvnorm(n=n,mean=runif(p,-10,10), sigma = positiva.definida(p))
+x=rmvnorm(n=n, mean = runif(p,-10,10)) #identidade
+beta=matrix(runif(q*p,-5,5))
+X <- list()
+y <- matrix(0, n, q)
+
+#GERA Y
+gera.y.estimadores <- function(x, beta, p, n, q)
+{
+  X <- list()
+  y <- matrix(0, n, q)
+  for (i in 1:n) {
+    X[[i]] <- rbind(cbind(t(x[i,]), t(rep(0, p))), cbind(t(rep(0, p)),t(x[i,]))) 
+    mu.i <- X[[i]]%*%beta
+    y[i,] <- as.vector(mu.i) + rmvnorm(1, mean = rep(0,q), sigma = diag(runif(q, 0.5, 1.5)))
+  }
+  y <- as.data.frame(y)
+  est <- estimadores(X,y)
+  return(est)
+}
+
+#replica.tam
+#pega.beta <- replica.tam %>% sapply("[[", "Beta chapeu")
+#pega.sigma <- replica.tam %>% lapply("[[", "Sigma chapeu")
+
+#sqrt(diag(solve((pega.sigma[[1]]))))
+#passo1 <- lapply(pega.sigma, function(x) sqrt(diag(solve(as.matrix(x)))))
+#passo1
+#passo2 <- t(matrix(unlist(passo1), q,tam))
+#ep.beta <- apply(passo2, 2, mean)
+
+simulacao <- function(tam, x, beta, p, n, q)
+{
+  
+  replica.tam <- replicate(tam, list(gera.y.estimadores(x, beta, p , n, q)))
+  pega.beta <- replica.tam %>% sapply("[[", "Beta chapeu")
+  pega.sigma <- replica.tam %>% sapply("[[", "Sigma chapeu")
+  dp.beta <- apply(pega.beta, 1, sd)
+  media.beta <- apply(pega.beta, 1, mean)
+  
+  ep.beta <- mapply(function() sqrt(diag(solve(cov(as.matrix(pega.sigma))))), pega.sigma)
+  subtracao <- matrix(0,p*q,tam)
+  for (i in 1:tam) {
+    subtracao[,i] <- (pega.beta[,i] - beta)^2
+  }
+  eqm <- (1/tam)*apply(subtracao, 1, sum)
+  passo1 <- lapply(pega.sigma, function(x) sqrt(diag(solve(as.matrix(x)))))
+  passo1
+  passo2 <- t(matrix(unlist(passo1), q,tam))
+  ep.beta <- apply(passo2, 2, mean)
+  lista.final <- list(eqm, ep.beta, media.beta, dp.beta, replica.tam)
+  names(lista.final) <- c("EQM", "Erro Padrao", "Media", "SD", "estimativas")
+  return(lista.final)
+}
+
+
+simu.100 <- simulacao(100, x, beta, p, n, q)
+simu.100$Media - beta
+
+simu.500 <- simulacao(500, x, beta, p, n, q)
+simu.500$Media - beta
+
+simu.1000 <- simulacao(1000, x, beta, p, n, q)
+plot(simu.1000$Media - beta)
+
+
+

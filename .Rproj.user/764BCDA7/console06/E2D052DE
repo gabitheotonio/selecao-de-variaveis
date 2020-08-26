@@ -1,0 +1,71 @@
+[0m[0KMicrosoft Windows [versão 10.0.18362.1016][0K[?25l
+(c) 2019 Microsoft Corporation. Todos os direitos reservados.[0K
+[0K
+C:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>[0K[?25hg[0Ki[0Kt[0K[67G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git i[0K[?25hn[0Ki[0Kt[0K]0;  - git  init[?25l
+[0K[?25h]0; Initialized empty Git repository in C:/Users/gabri/Desktop/Faculdade/Outros/Pesquisa/IC/[0KT[?25l
+estes IC/.git/[0K
+[0K
+C:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>[0K[?25hg[0Ki[0Kt[0K[67G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git c[0K[?25ho[0Km[0Ki[0Kt[0K[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git comi[0K[?25h[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git com[0K[?25hm[0Kt[0K[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git comm[0K[?25hi[0Kt[0K[74G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git commit -[0K[?25hm[0K[77G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git commit -m "[0K[?25hs[0Ke[0Kl[0Ke[0Kc[0Ka[0Ko[0K[86G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git commit -m "selecao d[0K[?25he[0K[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git commit -m "selecao d[0K[?25h[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git commit -m "selecao[0K[86G[?25h[85G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git commit -m "seleca[0K[?25h[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git commit -m "selec[0K[?25h[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git commit -m "sele[0K[?25h[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git commit -m "sel[0K[?25h[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git commit -m "se[0K[?25h[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git commit -m "s[0K[?25h[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git commit -m "[0K[?25ha[0Kd[0Kd[0K[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git commit -m "ad[0K[?25hi[0Kc[0Ki[0Ko[0Kn[0Ka[0Kn[0Kd[0K[89G[88G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git commit -m "adicionando[0K[?25h[?25l
+[0K[?25ha[0Kr[0Kq[0Ku[0Ki[0Kv[0Ko[0Ks[0K"[0K[11G[10G[?25l
+[0K[?25h]0;  - git  commit -m "adicionando arquivos"]0; [?25l
+*** Please tell me who you are.[0K
+[0K
+Run[0K
+[0K
+  git config --global user.email "you@example.com"[0K
+  git config --global user.name "Your Name"[0K
+[0K
+to set your account's default identity.[0K
+Omit --global to set the identity only in this repository.[0K
+[0K
+fatal: unable to auto-detect email address (got 'gabri@LAPTOP-FFQD8P68.(none)')[0K
+[0K
+C:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>[0K[?25h[64G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC> g[0K[?25hi[0Kt[0K[68G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC> git c[0K[?25ho[0Kn[0Kf[0Ki[0Kg[0K[75G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC> git config -[0K[?25h-[0K[78G[77G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC> git config --g[0K[?25hl[0Ko[0Kb[0Ka[0Kl[0K[84G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC> git config --global u[0K[?25hs[0Ke[0Kr[0K.[0K[0Ke[?25l
+[0K[?25hm[0Ka[0Ki[0Kl[0K[6G[?25lmail "[0K[?25hg[0Ka[0Kb[0Kr[0Ki[0Ke[0Kl[0Ka[0K_[0Kt[0Kh[0Ke[0Ko[0Kt[0Ko[0Kn[0Ki[0Ko[0K@[0Kh[0Ko[0Kt[0Km[0Ka[0Ki[0Kl[0K.[0Kc[0Ko[0Km[0K"[0K]0;  - git  config --global user.email "gabriela_theotonio@hotmail.com"[?25l
+[0K[?25h]0; [?25l
+C:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>[0K[?25h[64G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC> git config --global user.[0Ke
+mail "gabriela_theotonio@hotmail.com"[0K[?25h[?25lmail "gabriela_theotonio@hotmail.com[0K[?25h[?25lmail "gabriela_theotonio@hotmail.co[0K[?25h[?25lmail "gabriela_theotonio@hotmail.c[0K[?25h[?25lmail "gabriela_theotonio@hotmail[0K[?25h[?25lmail "gabriela_theotonio@hotma[0K[?25h[?25lmail "gabriela_theotonio@hotm[0K[?25h[?25lmail "gabriela_theotonio@hot[0K[?25h[?25lmail "gabriela_theotonio@ho[0K[?25h[?25lmail "gabriela_theotonio@h[0K[?25h[?25lmail "gabriela_theotonio@[0K[?25h[?25lmail "gabriela_theotonio[0K[?25h[?25lmail "gabriela_theotoni[0K[?25h[?25lmail "gabriela_theoton[0K[?25h[?25lmail "gabriela_theoto[0K[?25h[?25lmail "gabriela_theot[0K[?25h[?25lmail "gabriela_theo[0K[?25h[?25lmail "gabriela_the[0K[?25h[?25lmail "gabriela_th[0K[?25h[?25lmail "gabriela_t[0K[?25h[?25lmail "gabriela[0K[?25h[?25lmail "gabriel[0K[?25h[?25lmail "gabrie[0K[?25h[?25lmail "gabri[0K[?25h[?25lmail "gabr[0K[?25h[?25lmail "gab[0K[?25h[?25lmail "ga[0K[?25h[?25lmail "g[0K[?25h[?25lmail "[0K[?25h[?25lmail[0K[6G[?25h[5G[?25lmai[0K[?25h[?25lma[0K[?25h[?25lm[0K[?25h[?25l[0K[?25h[?25l[1AC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC> git config --global user.[0K
+[0K[1A[89G[?25h[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC> git config --global user[0K
+[0K[1A[88G[?25h[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC> git config --global user.[0K
+[0K[1A[89G[?25h[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC> git config --global user.[0Kn
+[0K[?25ha[0Km[0Ke[0K[5G[?25lame "[0K[?25hG[0Ka[0Kb[0Kr[0Ke[0K[?25lame "Gabr[0K[?25hi[0Ke[0Kl[0Ka[0K[15G[?25lame "Gabriela T[0K[?25hh[0Ke[0Ko[0Kt[0Ko[0Kn[0Ki[0Ko[0K"[0K]0;  - git  config --global user.name "Gabriela Theotonio"[?25l
+[0K[?25h]0; [?25l
+C:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>[0K[?25h[64G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC> git config --global user.[0Kn
+ame "Gabriela Theotonio"[0K[?25h[?25l[1AC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC> git config --global user.[0Ke
+mail "gabriela_theotonio@hotmail.com"[0K[?25h[?25l[1AC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>git commit -m "adicionando[0K
+arquivos"[0K[?25h]0;  - git  commit -m "adicionando arquivos"[?25l
+[0K[?25hOn branch master[0K[?25l
+[0K
+Initial commit[0K
+[0K
+Untracked files:[0K
+  (use "git add <file>..." to include in what will be committed)[0K
+        [0;31m.RData[0m[0K
+        [0;31m.Rhistory[0m[0K
+        [0;31m.Rproj.user/[0m[0K[9G[?25h]0; [?25l
+        [0;31mARQUIVOMULTI.R[0m[0K
+        [0;31mAtlasBrasil_Consulta.csv[0m[0K
+        [0;31mAtlasBrasil_Consulta.xlsx[0m[0K
+        [0;31mTeste.dados[0m[0K
+        [0;31mTeste_dados.R[0m[0K
+        [0;31mTestes IC.Rproj[0m[0K
+        [0;31manalise_MGclecio.R[0m[0K
+        [0;31mbackward.R[0m[0K
+        [0;31mdados-casas.csv[0m[0K
+        [0;31mdados-energia.csv[0m[0K
+        [0;31mdados-football.csv[0m[0K
+        [0;31mdados-football.xls[0m[0K
+        [0;31mdados-gasolina.csv[0m[0K
+        [0;31mdados-pureza-hidro.csv[0m[0K
+        [0;31mdados.txt[0m[0K
+        [0;31mestimadores_multi.R[0m[0K
+        [0;31mforward.R[0m[0K
+        [0;31m"generaliza\303\247\303\243o.R"[0m[0K
+        [0;31mlasso.R[0m[0K
+        [0;31mmultivariate-backward.R[0m[0K
+        [0;31mtest_script.R[0m[0K
+        [0;31mutility_functions.R[0m[0K
+[0K
+nothing added to commit but untracked files present (use "git add" to track)[0K
+[0K
+C:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC>[0K[?25h[64G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC> g[0K[?25hi[0Kt[0K[68G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC> git a[0K[?25hd[0Kd[0K[72G[71G[72G[?25lC:\Users\gabri\Desktop\Faculdade\Outros\Pesquisa\IC\Testes IC> git add .[0K[?25h[74G[73G

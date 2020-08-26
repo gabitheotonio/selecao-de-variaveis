@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1592418704762.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "3D40201F",
+    "lastKnownWriteTime" : 1595608078,
+    "last_content_update" : 1595608079005,
+    "path" : "C:/Users/gabri/Desktop/Faculdade/Outros/Pesquisa/IC/Testes IC/multivariate-backward.R",
+    "project_path" : "multivariate-backward.R",
+    "properties" : {
+        "cursorPosition" : "92,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1588338728071.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "AB0615FC",
+    "lastKnownWriteTime" : 1588287868,
+    "last_content_update" : 1588287868,
+    "path" : "C:/Users/gabri/Desktop/Faculdade/Outros/Pesquisa/IC/Testes IC/estimadores_multi.R",
+    "project_path" : "estimadores_multi.R",
+    "properties" : {
+        "cursorPosition" : "15,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

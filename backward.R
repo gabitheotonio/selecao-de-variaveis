@@ -1,0 +1,66 @@
+alpha <- 0.05
+backwardpv <- function(x,y,alpha){
+  reg <- lm(y~x)
+  X <- cbind(1,x)
+  xn <- X
+  aa <- summary(reg)
+  bb <- aa$coefficients[,4]
+  criterio <- sum(bb>alpha)
+  if(criterio > 0){
+    xmenos <- c()
+    historico <- data.frame(names(bb))
+    historico[,2] <- names(bb)
+    while (criterio > 0)
+    {
+      pmaxi <- which.max(bb)
+      xmenos <- cbind(xmenos, as.character(historico[which(names(pmaxi) == historico[,2]),1]))
+      historico[which(names(pmaxi) == historico[,2]),2] <- NA
+      xn <- xn[,-pmaxi]
+      reg <- lm(y ~ -1 + xn)
+      aa <- summary(reg)
+      bb <- aa$coefficients[,4]
+      historico[!is.na(historico[,2]),2] <- names(bb) 
+      criterio <- sum(bb>alpha)
+    }
+  }
+  names(reg$coefficients) <- as.character(historico[!is.na(historico[,2]),1])
+  lista <- list(reg, xmenos)
+  names(lista) <- c("Seleção Backward", "Histórico")
+  return(lista)
+}
+######## Geração dos dados
+require(mvtnorm)
+tam <- 4
+n=100
+positiva.definida <- function(p)
+{
+  mcov <- matrix(runif(p^2, -1,1), ncol = p, nrow = p)
+  diag(mcov) <- abs(diag(mcov))
+  mcov <- (mcov + t(mcov))/2
+  while(sum(eigen(mcov)$values < 0) != 0) {
+    mcov <- matrix(runif(p^2, -1,1), ncol = p, nrow = p)
+    mcov
+    diag(mcov) <- abs(diag(mcov))
+    mcov <- (mcov + t(mcov))/2
+    
+  }
+  return(mcov)
+}
+
+system.time(positiva.definida(8))
+covariancia = positiva.definida(4)
+dim(runif(p,-10,10))
+dim(covariancia)
+?rmvnorm
+x=rmvnorm(n=n,mean=runif(tam,0,10), sigma = covariancia) 
+x=rmvnorm(n=n,mean=runif(tam,-10,10)) # sigma=matriz identidade
+beta=matrix(runif(tam+1,-0.5,0.5))
+X=cbind(1,x)
+erro=rnorm(n,0,1)
+y=X%*%beta + erro
+summary(lm(y~x))
+fit.model=backwardpv(x,y,0.01)
+fit.model
+summary(fit.model$`Seleção Backward`)
+fit.model$Histórico
+

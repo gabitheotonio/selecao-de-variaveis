@@ -1,0 +1,76 @@
+#Dados mg - funções
+backwardpv <- function(x,y,alpha){
+  reg <- lm(y~x)
+  X <- cbind(1,x)
+  xn <- X
+  aa <- summary(reg)
+  bb <- aa$coefficients[,4]
+  criterio <- sum(bb>alpha)
+  if(criterio > 0){
+    xmenos <- c()
+    historico <- data.frame(names(bb))
+    historico[,2] <- names(bb)
+    while (criterio > 0)
+    {
+      pmaxi <- which.max(bb)
+      xmenos <- cbind(xmenos, as.character(historico[which(names(pmaxi) == historico[,2]),1]))
+      historico[which(names(pmaxi) == historico[,2]),2] <- NA
+      xn <- xn[,-pmaxi]
+      reg <- lm(y ~ -1 + xn)
+      aa <- summary(reg)
+      bb <- aa$coefficients[,4]
+      historico[!is.na(historico[,2]),2] <- names(bb) 
+      criterio <- sum(bb>alpha)
+    }
+  }
+  names(reg$coefficients) <- as.character(historico[!is.na(historico[,2]),1])
+  lista <- list(reg, xmenos)
+  names(lista) <- c("Seleção Backward", "Histórico")
+  return(lista)
+}
+##################################################################
+
+
+#dados MG - analise
+dados.mg <- read.csv2(file.choose(), sep = ",", dec = ",", header = TRUE)
+str(dados.mg)
+names(dados.mg) <- c("mun", "atividade", "desocupacao", "saneamento", "coleta.lixo", 
+                     "energia.eletrica", "espeprança.nascer", "PEA", "fecundidade", 
+                     "dependencia", "t.envelhecimento", "t.analf", "fundamental.comp",
+                     "renda.pc", "pobres")
+
+#Especialidades - munícipios (aceitar til)
+#Taxa de atividade - 18 anos ou mais 2010	
+#Taxa de desocupação - 18 anos ou mais 2010	
+#% da população em domicílios com banheiro e água encanada 2010	
+#% da população em domicílios com coleta de lixo 2010	
+#% da população em domicílios com energia elétrica 2010
+#Esperança de vida ao nascer 2010	
+#PEA - 18 anos ou mais 2010	
+#Taxa de fecundidade total 2010	
+#Razão de dependência 2010	
+#Taxa de envelhecimento 2010	
+#Taxa de analfabetismo - 18 anos ou mais 2010	
+#% de 18 anos ou mais com fundamental completo 2010	
+#Renda per capita 2010	
+#% de pobres 2010
+
+dados.mg$atividade <- as.numeric(dados.mg$atividade)
+dados.mg$desocupacao <- as.numeric(dados.mg$desocupacao)
+dados.mg$saneamento <- as.numeric(dados.mg$saneamento)
+dados.mg$coleta.lixo <- as.numeric(dados.mg$coleta.lixo)
+dados.mg$energia.eletrica <- as.numeric(dados.mg$energia.eletrica)
+dados.mg$espeprança.nascer <- as.numeric(dados.mg$espeprança.nascer)
+dados.mg$PEA <- as.numeric(dados.mg$PEA)
+dados.mg$fecundidade <- as.numeric(dados.mg$fecundidade)
+dados.mg$dependencia<- as.numeric(dados.mg$dependencia)
+dados.mg$t.envelhecimento <- as.numeric(dados.mg$t.envelhecimento)
+dados.mg$t.analf <- as.numeric(dados.mg$t.analf)
+dados.mg$fundamental.comp <- as.numeric(dados.mg$fundamental.comp)
+dados.mg$renda.pc <- as.numeric(dados.mg$renda.pc)
+dados.mg$pobres <- as.numeric(dados.mg$pobres)
+str(dados.mg)
+
+regressao1 <- lm(dados.mg$renda.pc ~ dados.mg[,2])
+summary(regressao1)
+plot(
