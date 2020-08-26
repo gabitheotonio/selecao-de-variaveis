@@ -1,7 +1,7 @@
 # Seleção de variáveis
 ## Classificação dos arquivos
 
-###Regressão linear simples
+### Regressão linear simples
 Banco de dados:  
 - *dados-casa*  
 - *dados-energia*  
@@ -11,7 +11,7 @@ Banco de dados:
 
 Scripts: para regressão linear simples test_script
 
-###Regressão linear múltipla
+### Regressão linear múltipla
 - Método de seleção de variáveis  
 *backard.r* - toda a programação de um backward univariado  
 *forward.r* - toda a programação de um forward univariado  
